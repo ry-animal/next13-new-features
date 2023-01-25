@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { Todo } from "../../../typings";
 
 type PageProps = {
@@ -20,6 +21,8 @@ const fetchTodo = async (todoId: string) => {
 
 async function TodoPage({ params: { todoId } }: PageProps) {
   const todo: Todo = await fetchTodo(todoId);
+
+  if (!todo) return notFound();
 
   return (
     <>
